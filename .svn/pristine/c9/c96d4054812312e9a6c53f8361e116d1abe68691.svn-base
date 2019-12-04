@@ -1,0 +1,47 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TextListener : MonoBehaviour
+{
+    // This skript resides on the player and spawns a text box when the player 
+    //interacts with anythnig. It 
+    public InteractAction interactAction;
+    public GameObject textObject;
+    public GameObject activeBox;
+    public ActionColliderManager colManager;
+    
+   
+
+    public void Start()
+    {
+        interactAction = GetComponent<InteractAction>();
+        colManager = GetComponent<ActionColliderManager>();
+        activeBox = colManager.GetActiveGameObject();
+    }
+
+    public void Update()
+    {
+        activeBox = colManager.GetActiveGameObject();
+        if (interactAction.isInteracting)
+        {
+            if (GameObject.FindWithTag("TextBox"))
+            {
+                
+            }
+            else
+            {
+
+                Instantiate(textObject, activeBox.GetComponent<BoxInteraction>().otherObject.transform.GetChild(0).transform, false);
+                
+            }
+
+
+        }
+        else if (GameObject.FindWithTag("TextBox"))
+        {
+            Destroy(GameObject.FindWithTag("TextBox"));
+            
+        }
+    }
+}

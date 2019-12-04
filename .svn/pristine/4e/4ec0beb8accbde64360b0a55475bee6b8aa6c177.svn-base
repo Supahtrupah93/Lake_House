@@ -1,0 +1,41 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum QuestType
+{
+    TalkTo
+}
+
+public class QuestEvent : MonoBehaviour
+{
+    public QuestType type;
+    public string questName = "bolimedjoka";
+
+    public bool isSolved = false;
+
+    public GameObject whoToTalk;
+    public GameObject player;
+
+    public void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+     
+
+    public void TrySolve(QuestType questType, object[] asd)
+    {
+        switch (type)
+        {
+            case QuestType.TalkTo:
+                if((string)asd[0] == questName)
+                {
+                    isSolved = true;
+                }
+                break;
+            default:
+                Debug.Log("Default case");
+                break;
+        }
+    }
+}
